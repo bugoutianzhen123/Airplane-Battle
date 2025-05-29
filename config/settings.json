@@ -1,0 +1,47 @@
+{
+  "player": {
+    "lives": 3,
+    "acceleration": 0.7,
+    "max_speed": 9
+  },
+  "screen_width": 800,
+  "screen_height": 600,
+  "fullscreen": false,
+  "player_speed": 5,
+  "enemy_spawn_rate": 1.5,
+  "volume": 0.5,
+  "key_bindings": {
+    "player1": {
+      "left": "A",
+      "right": "D",
+      "shoot": "SPACE",
+      "up": "W",
+      "down": "S"
+    },
+    "player2": {
+      "left": "LEFT",
+      "right": "RIGHT",
+      "shoot": "SLASH",
+      "up": "UP",
+      "down": "DOWN"
+    }
+  },
+  "font": "SimHei",
+  "enemies": {
+    "enemy_normal": {
+      "speed": 2,
+      "score": 10,
+      "health": 1
+    },
+    "enemy_special": {
+      "speed": 1,
+      "score": 50,
+      "health": 3
+    },
+    "enemy_boss": {
+      "speed": 1,
+      "score": 500,
+      "health": 20
+    }
+  }
+}
