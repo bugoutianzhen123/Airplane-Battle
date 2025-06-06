@@ -140,7 +140,7 @@ class Player:
         self.bullets = []
         self.last_shot_time = 0
         self.shoot_cooldown = 200  # 射击冷却时间（毫秒）
-        
+
         # 护盾相关属性
         self.has_shield = False
         self.shield_alpha = 255
@@ -152,7 +152,7 @@ class Player:
         self.shield_warning_time = 1000  # 最后1秒开始闪烁警告
         self.shield_warning_alpha = 255
         self.shield_warning_fade_speed = 25  # 警告闪烁速度
-        
+
         # 无敌时间
         self.invincible = False
         self.invincible_timer = 0

@@ -46,6 +46,7 @@ class Enemy:
             self.sounds = {}
 
         self.config = config["enemies"]
+        self.game_config = config  # 保存完整配置
         try:
             self.original_image = pygame.image.load("../assets/images/"+enemy_type+".png")
             # 根据敌人类型设置不同的大小
@@ -108,18 +109,9 @@ class Enemy:
             self.vertical_range = 30
             self.zigzag_speed = 0.02
         # 道具掉落概率
-        self.drop_rates = {
-            "enemy_normal": 1,    # 普通敌人10%概率掉落
-            "enemy_special": 0.3,   # 精英敌人30%概率掉落
-            "enemy_boss": 1.0       # Boss必定掉落
-        }
+        self.drop_rates = config["item_drop"]["drop_rates"]
         # 道具类型权重
-        self.item_weights = {
-            "health": 0.4,  # 40%概率掉落生命道具
-            "weapon": 0.3,  # 30%概率掉落武器道具
-            "shield": 1,  # 20%概率掉落护盾道具
-            # "bomb": 0.1     # 10%概率掉落炸弹道具
-        }
+        self.item_weights = config["item_drop"]["item_weights"]
 
     def shoot(self):
         now = pygame.time.get_ticks()
@@ -345,7 +337,8 @@ class EnemyManager:
         self.explosions = []
         self.game_stage = 1
         self.stage_score = 0
-        self.stage_threshold = 100  # 达到这个分数进入下一阶段
+        self.stage_threshold = config["game_progression"]["stage_threshold"]  # 从配置中获取波次积分阈值
+        self.boss_stage_interval = config["game_progression"]["boss_stage_interval"]
         self.boss_spawned = False
         self.boss_defeated = False
         self.boss = None  # 保存Boss引用
@@ -358,7 +351,7 @@ class EnemyManager:
         if not self.boss_spawned and player.score >= self.stage_score + self.stage_threshold:
             self.game_stage += 1
             self.stage_score = player.score
-            if self.game_stage % 3 == 0:  # 每3个阶段出现一次Boss
+            if self.game_stage % self.boss_stage_interval == 0:  # 使用配置的Boss出现间隔
                 self.spawn_boss()
             else:
                 self.spawn_elite()
